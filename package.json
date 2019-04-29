@@ -1,0 +1,24 @@
+{
+  "name": "plant-site-server",
+  "version": "1.0.0",
+  "description": "Server for my plant site",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DavidThorpe71/plant-site-server.git"
+  },
+  "keywords": [
+    "node",
+    "plants",
+    "express"
+  ],
+  "author": "David Thorpe",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DavidThorpe71/plant-site-server/issues"
+  },
+  "homepage": "https://github.com/DavidThorpe71/plant-site-server#readme"
+}
