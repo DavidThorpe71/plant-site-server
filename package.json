@@ -4,6 +4,8 @@
   "description": "Server for my plant site",
   "main": "index.js",
   "scripts": {
+    "dev": "nodemon",
+    "tsc": "tsc",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -20,5 +22,21 @@
   "bugs": {
     "url": "https://github.com/DavidThorpe71/plant-site-server/issues"
   },
-  "homepage": "https://github.com/DavidThorpe71/plant-site-server#readme"
+  "homepage": "https://github.com/DavidThorpe71/plant-site-server#readme",
+  "dependencies": {
+    "apollo-server": "^2.4.8",
+    "apollo-server-express": "^2.4.8",
+    "dotenv": "^7.0.0",
+    "eslint": "^5.16.0",
+    "eslint-config-airbnb": "^17.1.0",
+    "eslint-plugin-import": "^2.17.2",
+    "eslint-plugin-jsx-a11y": "^6.2.1",
+    "eslint-plugin-react": "^7.12.4",
+    "express": "^4.16.4",
+    "graphql": "^14.2.1",
+    "nodemon": "^1.18.11",
+    "ts-node": "^8.1.0",
+    "typescript": "^3.4.5",
+    "typescript-eslint-parser": "^22.0.0"
+  }
 }
