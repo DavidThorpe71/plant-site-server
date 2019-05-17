@@ -8,27 +8,17 @@ const {
   RDS_PASSWORD,
   RDS_PORT,
   ENV,
-  DEV_USER,
-  DEV_PASS
+  MYSQL_LOCAL_USER,
+  MYSQL_LOCAL_PASS,
+  MYSQL_LOCAL_HOST
 } = process.env;
 
-export default () => {
-  console.log({ RDS_HOSTNAME, RDS_USERNAME, RDS_PASSWORD });
-  const connection = mysql.createConnection({
-    host: RDS_HOSTNAME,
-    user: RDS_USERNAME,
-    password: RDS_PASSWORD,
-    port: Number(RDS_PORT)
-  });
-
-  connection.connect((err) => {
-    if (err) {
-      console.error(`Database connection failed: ${err.stack}`);
-      return;
-    }
-
-    console.log('Connected to database.');
-  });
-
-  connection.end();
+const config = {
+  user: MYSQL_LOCAL_USER,
+  password: MYSQL_LOCAL_PASS,
+  database: 'plantsite'
 };
+
+const connection = mysql.createConnection(config);
+
+export default connection;

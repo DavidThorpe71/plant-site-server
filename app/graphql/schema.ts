@@ -6,6 +6,10 @@ const typeDefs = gql`
     "A simple type for getting started!"
     hello: String
   }
+  type Mutation {
+    "A first test mutation"
+    addPlant(name: String, latinName: String, picture: String): String
+  }
 `;
 
 export { typeDefs, resolvers };
