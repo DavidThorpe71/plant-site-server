@@ -2,7 +2,9 @@ import mongoose from 'mongoose';
 
 const db = () => {
   mongoose.connect('mongodb://localhost:27017/plant-site', {
-    useNewUrlParser: true
+    useNewUrlParser: true,
+    useFindAndModify: false,
+    useCreateIndex: true
   });
 
   const db = mongoose.connection;

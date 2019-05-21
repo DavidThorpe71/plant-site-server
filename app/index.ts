@@ -1,7 +1,7 @@
 import { ApolloServer } from 'apollo-server-express';
 import express from 'express';
 import { typeDefs, resolvers } from './graphql/schema';
-// import db from './db/mongoDbConfig';
+import db from './db/mongoDbConfig';
 
 require('dotenv').config();
 
@@ -13,7 +13,7 @@ const server = new ApolloServer({
 });
 
 const app = express();
-
+db();
 server.applyMiddleware({ app }); // app is from an existing express app
 
 app.listen({ port: PORT }, () => console.log(
