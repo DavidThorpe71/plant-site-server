@@ -11,6 +11,7 @@ const typeDefs = gql`
   type Plant {
     _id: String
     name: String
+    permalink: String
     latinName: String
     location: String
     image: String
@@ -24,7 +25,7 @@ const typeDefs = gql`
   }
 
   type Query {
-    getPlant(_id: String, name: String): Plant
+    getPlant(_id: String, name: String, permalink: String): Plant
     getPlants(filter: GetPlantFilter): [Plant]
   }
 

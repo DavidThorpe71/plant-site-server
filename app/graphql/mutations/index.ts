@@ -1,3 +1,4 @@
+import slugify from 'slugify';
 import Plant, { Light } from '../../db/models/Plant';
 
 type TAddPlantArgs = {
@@ -21,6 +22,7 @@ type TEditPlantArgs = {
 
 type TRemovePlantArgs = {
   _id: string;
+  permalink: string;
 };
 
 const mutations = {
@@ -38,6 +40,7 @@ const mutations = {
         { name, latinName },
         {
           name,
+          permalink: slugify(name, { lower: true }),
           latinName,
           location,
           image,
@@ -71,6 +74,9 @@ const mutations = {
         { _id },
         {
           name: name || plantToEdit.name,
+          permalink:
+            plantToEdit.permalink
+            || slugify(name || plantToEdit.name, { lower: true }),
           latinName: latinName || plantToEdit.latinName,
           location: location || plantToEdit.location,
           image: image || plantToEdit.image,
@@ -90,8 +96,10 @@ const mutations = {
       args: TRemovePlantArgs,
       ctx: unknown
     ) => {
-      const { _id } = args;
-      const plantToRemove = await Plant.findOneAndDelete({ _id }).exec();
+      const { _id, permalink } = args;
+      const plantToRemove = await Plant.findOneAndDelete({
+        $or: [{ _id }, { permalink }]
+      }).exec();
 
       if (!plantToRemove) {
         throw new Error(`Unable to remove plant with id: ${_id}`);

@@ -1,5 +1,6 @@
 import { ApolloServer } from 'apollo-server-express';
 import express from 'express';
+import cors from 'cors';
 import { typeDefs, resolvers } from './graphql/schema';
 import db from './db/mongoDbConfig';
 
@@ -14,6 +15,9 @@ const server = new ApolloServer({
 
 const app = express();
 db();
+
+app.use(cors());
+
 server.applyMiddleware({ app }); // app is from an existing express app
 
 app.listen({ port: PORT }, () => console.log(

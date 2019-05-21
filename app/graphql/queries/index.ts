@@ -3,6 +3,7 @@ import Plant, { Light } from '../../db/models/Plant';
 type TGetPlantArgs = {
   _id: string;
   name: string;
+  permalink: string;
 };
 
 type TGetPlantsFilter = {
@@ -16,11 +17,14 @@ type TGetPlantsArgs = {
 const queries = {
   Query: {
     getPlant: async (parent: unknown, args: TGetPlantArgs, ctx: unknown) => {
-      const { _id, name } = args;
-      const plant = await Plant.findOne({ $or: [{ _id }, { name }] }).exec();
+      const { _id, name, permalink } = args;
+      const plant = await Plant.findOne({
+        $or: [{ _id }, { name }, { permalink }]
+      }).exec();
       if (!plant) {
         throw new Error(
-          `No plant found for id: ${_id || null} and name: ${name || null}`
+          `No plant found for id: ${_id || null}, name: ${name
+            || null} or permalink: ${permalink || null}`
         );
       }
       return plant;

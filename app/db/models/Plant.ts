@@ -11,6 +11,7 @@ export enum Light {
 export interface IPlant extends Document {
   _id: mongoose.Types.ObjectId;
   name: string;
+  permalink: string;
   latinName: string;
   location: string;
   image: string;
@@ -21,6 +22,7 @@ export interface IPlant extends Document {
 const plantSchema = new Schema(
   {
     name: { type: String, required: true },
+    permalink: { type: String, required: true },
     latinName: { type: String },
     location: { type: String },
     image: { type: String },
