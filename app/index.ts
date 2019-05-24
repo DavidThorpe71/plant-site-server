@@ -1,16 +1,37 @@
-import { ApolloServer } from 'apollo-server-express';
+import { ApolloServer, Request } from 'apollo-server-express';
 import express from 'express';
 import cors from 'cors';
+import DataLoader from 'dataloader';
+import db, { models } from './db/mongoDbConfig';
 import { typeDefs, resolvers } from './graphql/schema';
-import db from './db/mongoDbConfig';
+import PlantAPI from './datasources/plant';
+
+import { batchPlants } from './loaders/plant';
 
 require('dotenv').config();
+
+const dataSources = () => ({
+  plantAPI: new PlantAPI({ models })
+});
 
 const { PORT } = process.env;
 const server = new ApolloServer({
   // These will be defined for both new or existing servers
   typeDefs,
-  resolvers
+  resolvers,
+  dataSources,
+  context: async ({ req, connection }: { req: Request; connection: any }) => {
+    if (connection) {
+      return {
+        models
+      };
+    }
+    if (req) {
+      return {
+        models
+      };
+    }
+  }
 });
 
 const app = express();

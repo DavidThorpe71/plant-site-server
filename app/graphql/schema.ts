@@ -25,7 +25,7 @@ const typeDefs = gql`
   }
 
   type Query {
-    getPlant(_id: String, name: String, permalink: String): Plant
+    getPlant(plantName: String): Plant
     getPlants(filter: GetPlantFilter): [Plant]
   }
 

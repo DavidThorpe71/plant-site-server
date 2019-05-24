@@ -34,4 +34,5 @@ const plantSchema = new Schema(
 
 plantSchema.plugin(mongodbErrorHandler);
 
-export default mongoose.model<IPlant>('Plant', plantSchema);
+const Plant = mongoose.model<IPlant>('Plant', plantSchema);
+export default Plant;

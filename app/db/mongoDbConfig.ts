@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import Plant from './models/Plant';
 
 const db = () => {
   mongoose.connect('mongodb://localhost:27017/plant-site', {
@@ -13,4 +14,8 @@ const db = () => {
     console.log(`🗄 connected to mongoDb database`);
   });
 };
+
+const models = { Plant };
+export { models };
+
 export default db;
