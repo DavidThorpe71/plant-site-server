@@ -1,8 +1,7 @@
-import { models } from '../../db/mongoDbConfig';
 import { Light } from '../../db/models/Plant';
 
 type TGetPlantArgs = {
-  plantName: string;
+  permalink: string;
 };
 
 type TGetPlantsFilter = {
@@ -19,20 +18,12 @@ const queries = {
       parent: unknown,
       args: TGetPlantArgs,
       { dataSources }: { dataSources: any }
-    ) => dataSources.plantAPI.getPlant({ plantName: args.plantName }),
+    ) => dataSources.plantAPI.getPlant({ permalink: args.permalink }),
     getPlants: async (
       parent: unknown,
-      args: TGetPlantsArgs,
+      { filter }: TGetPlantsArgs,
       { dataSources }: { dataSources: any }
-    ) => {
-      const { filter } = args;
-      const where = filter
-        ? {
-          $or: [{ location: filter.location }, { light: filter.light }]
-        }
-        : {};
-      return dataSources.plantAPI.getPlants({ where });
-    }
+    ) => dataSources.plantAPI.getPlants({ filter })
   }
 };
 

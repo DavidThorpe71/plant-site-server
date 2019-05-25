@@ -1,4 +1,4 @@
-import { gql } from 'apollo-server';
+import { gql } from 'apollo-server-express';
 import resolvers from './resolvers';
 
 const typeDefs = gql`
@@ -25,7 +25,7 @@ const typeDefs = gql`
   }
 
   type Query {
-    getPlant(plantName: String): Plant
+    getPlant(permalink: String): Plant
     getPlants(filter: GetPlantFilter): [Plant]
   }
 

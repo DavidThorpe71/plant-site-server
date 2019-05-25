@@ -1,0 +1,1 @@
+declare module'apollo-server-redis-cache';

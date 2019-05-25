@@ -1,5 +1,4 @@
 import { DataSource } from 'apollo-datasource';
-// import { models } from '../db/mongoDbConfig';
 
 class PlantAPI extends DataSource {
   constructor({ models }) {
@@ -11,14 +10,19 @@ class PlantAPI extends DataSource {
     this.context = config.context;
   }
 
-  async getPlant({ plantName: plantNameArg } = {}) {
+  async getPlant({ permalink } = {}) {
     const plant = await this.models.Plant.findOne({
-      name: plantNameArg
+      permalink
     }).exec();
     return plant;
   }
 
-  async getPlants({ where }) {
+  async getPlants({ filter }) {
+    const where = filter
+      ? {
+        $or: [{ location: filter.location }, { light: filter.light }]
+      }
+      : {};
     const plants = await this.models.Plant.find(where);
     if (plants.length < 1) {
       throw new Error(

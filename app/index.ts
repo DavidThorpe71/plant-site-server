@@ -1,12 +1,9 @@
 import { ApolloServer, Request } from 'apollo-server-express';
 import express from 'express';
-import cors from 'cors';
-import DataLoader from 'dataloader';
+import { RedisCache } from 'apollo-server-cache-redis';
 import db, { models } from './db/mongoDbConfig';
 import { typeDefs, resolvers } from './graphql/schema';
 import PlantAPI from './datasources/plant';
-
-import { batchPlants } from './loaders/plant';
 
 require('dotenv').config();
 
@@ -15,10 +12,14 @@ const dataSources = () => ({
 });
 
 const { PORT } = process.env;
+const app = express();
+
 const server = new ApolloServer({
-  // These will be defined for both new or existing servers
   typeDefs,
   resolvers,
+  persistedQueries: {
+    cache: new RedisCache({ host: 'localhost' })
+  },
   dataSources,
   context: async ({ req, connection }: { req: Request; connection: any }) => {
     if (connection) {
@@ -34,10 +35,7 @@ const server = new ApolloServer({
   }
 });
 
-const app = express();
 db();
-
-app.use(cors());
 
 server.applyMiddleware({ app }); // app is from an existing express app
 
