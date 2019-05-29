@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "nodemon",
     "tsc": "tsc",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "yarn tsc && cross-env NODE_ENV=production pm2 start process.json"
   },
   "repository": {
     "type": "git",
