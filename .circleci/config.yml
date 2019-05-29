@@ -38,4 +38,4 @@ jobs:
 
       - deploy:
         name: aws
-        command: ssh -o "StrictHostKeyChecking no" $HOST_NAME@$HOST_ADDRESS "cd /var/www/plant-site-server; git pull; yarn install; yarn start"
+        command: ssh -o "StrictHostKeyChecking no" $HOST_NAME@$HOST_ADDRESS "cd /var/www/plant-site-server; sudo git pull; sudo yarn install; sudo yarn start"
