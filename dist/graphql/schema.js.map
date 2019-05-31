@@ -1,1 +1,1 @@
-{"version":3,"file":"schema.js","sourceRoot":"","sources":["../../app/graphql/schema.ts"],"names":[],"mappings":";;;;;AAAA,iDAAoC;AACpC,4DAAoC;AASjB,oBATZ,mBAAS,CASY;AAP5B,MAAM,QAAQ,GAAG,mBAAG,CAAA;;;;;CAKnB,CAAC;AAEO,4BAAQ"}
+{"version":3,"file":"schema.js","sourceRoot":"","sources":["../../app/graphql/schema.ts"],"names":[],"mappings":";;;;;AAAA,iEAA4C;AAC5C,4DAAoC;AAoDjB,oBApDZ,mBAAS,CAoDY;AAlD5B,MAAM,QAAQ,GAAG,2BAAG,CAAA;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;CAgDnB,CAAC;AAEO,4BAAQ"}
