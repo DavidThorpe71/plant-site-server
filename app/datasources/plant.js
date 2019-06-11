@@ -6,10 +6,6 @@ class PlantAPI extends DataSource {
     this.models = models;
   }
 
-  initialize(config) {
-    this.context = config.context;
-  }
-
   async getPlant({ permalink } = {}) {
     const plant = await this.models.Plant.findOne({
       permalink

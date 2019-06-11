@@ -7,32 +7,40 @@ import PlantAPI from './datasources/plant';
 
 require('dotenv').config();
 
-const dataSources = () => ({
+export const dataSources = () => ({
   plantAPI: new PlantAPI({ models })
 });
+
+export const context = async ({
+  req,
+  connection
+}: {
+req: Request;
+connection: any;
+}) => {
+  if (connection) {
+    return {
+      models
+    };
+  }
+  if (req) {
+    return {
+      models
+    };
+  }
+};
 
 const { PORT } = process.env;
 const app = express();
 
-const server = new ApolloServer({
+export const server = new ApolloServer({
   typeDefs,
   resolvers,
   persistedQueries: {
     cache: new RedisCache({ host: 'localhost' })
   },
   dataSources,
-  context: async ({ req, connection }: { req: Request; connection: any }) => {
-    if (connection) {
-      return {
-        models
-      };
-    }
-    if (req) {
-      return {
-        models
-      };
-    }
-  }
+  context
 });
 
 db();
