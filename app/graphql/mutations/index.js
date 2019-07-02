@@ -1,33 +1,9 @@
 import slugify from 'slugify';
-import Plant, { Light } from '../../db/models/Plant';
-
-type TAddPlantArgs = {
-  name: string;
-  latinName: string;
-  location: string;
-  image: string;
-  wateringInstructions: string;
-  light: Light;
-};
-
-type TEditPlantArgs = {
-  _id: string;
-  name: string;
-  latinName: string;
-  location: string;
-  image: string;
-  wateringInstructions: string;
-  light: Light;
-};
-
-type TRemovePlantArgs = {
-  _id: string;
-  permalink: string;
-};
+import Plant from '../../db/models/Plant';
 
 const mutations = {
   Mutation: {
-    addPlant: async (parent: unknown, args: TAddPlantArgs, ctx: unknown) => {
+    addPlant: async (parent, args) => {
       const {
         name,
         latinName,
@@ -56,7 +32,7 @@ const mutations = {
       }
       return newPlant;
     },
-    editPlant: async (parent: unknown, args: TEditPlantArgs, ctx: unknown) => {
+    editPlant: async (parent, args) => {
       const {
         _id,
         name,
@@ -91,11 +67,7 @@ const mutations = {
       }
       return editedPlant;
     },
-    removePlant: async (
-      parent: unknown,
-      args: TRemovePlantArgs,
-      ctx: unknown
-    ) => {
+    removePlant: async (parent, args) => {
       const { _id, permalink } = args;
       const plantToRemove = await Plant.findOneAndDelete({
         $or: [{ _id }, { permalink }]
@@ -105,6 +77,17 @@ const mutations = {
         throw new Error(`Unable to remove plant with id: ${_id}`);
       }
       return plantToRemove;
+    },
+    login: async (_, { email, password }, { dataSources }) => {
+      const user = await dataSources.userAPI.findUser({
+        email,
+        password
+      });
+      if (user) return Buffer.from(email).toString('base64');
+    },
+    addUser: async (_, { email, password }, { dataSources }) => {
+      const user = await dataSources.userAPI.addUser({ email, password });
+      if (user) return Buffer.from(email).toString('base64');
     }
   }
 };

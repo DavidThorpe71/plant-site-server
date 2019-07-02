@@ -1,23 +1,5 @@
-import mongoose, { Document, Schema } from 'mongoose';
+import mongoose, { Schema } from 'mongoose';
 import mongodbErrorHandler from 'mongoose-mongodb-errors';
-
-export enum Light {
-  None = 'None',
-  Shade = 'Shade',
-  Indirect = 'Indirect',
-  Direct = 'Direct'
-}
-
-export interface IPlant extends Document {
-  _id: mongoose.Types.ObjectId;
-  name: string;
-  permalink: string;
-  latinName: string;
-  location: string;
-  image: string;
-  wateringInstructions: string;
-  light: Light;
-}
 
 const plantSchema = new Schema(
   {
@@ -34,5 +16,5 @@ const plantSchema = new Schema(
 
 plantSchema.plugin(mongodbErrorHandler);
 
-const Plant = mongoose.model<IPlant>('Plant', plantSchema);
+const Plant = mongoose.model('Plant', plantSchema);
 export default Plant;

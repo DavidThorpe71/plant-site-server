@@ -19,6 +19,13 @@ const typeDefs = gql`
     light: Light
   }
 
+  type User {
+    id: ID!
+    email: String!
+    password: String!
+    plants: [Plant]!
+  }
+
   input GetPlantFilter {
     location: String
     light: Light
@@ -27,6 +34,8 @@ const typeDefs = gql`
   type Query {
     getPlant(permalink: String): Plant
     getPlants(filter: GetPlantFilter): [Plant]
+    me: User
+    getUsers: [User]
   }
 
   type Mutation {
@@ -48,6 +57,8 @@ const typeDefs = gql`
       light: Light
     ): Plant
     removePlant(_id: String): Plant
+    login(email: String, password: String): String
+    addUser(email: String, password: String): User
   }
 `;
 
