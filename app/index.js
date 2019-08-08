@@ -1,7 +1,7 @@
 import { ApolloServer } from 'apollo-server';
 import { RedisCache } from 'apollo-server-cache-redis';
 import isEmail from 'isemail';
-import { models } from './db/mongoDbConfig';
+import db, { models } from './db/mongoDbConfig';
 import { typeDefs, resolvers } from './graphql/schema';
 import PlantAPI from './datasources/plant';
 import UserAPI from './datasources/user';
@@ -11,6 +11,7 @@ require('dotenv').config();
 
 export const store = createStore();
 
+db();
 export const context = async ({ req }) => {
   const auth = (req.headers && req.headers.authorization) || '';
   const email = Buffer.from(auth, 'base64').toString('ascii');

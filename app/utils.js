@@ -15,7 +15,7 @@ const createStore = () => {
   sequelize
     .authenticate()
     .then((err) => {
-      console.log('Connection has been established successfully.');
+      console.log('Sequelize connection has been established successfully.');
     })
     .catch((err) => {
       console.log('Unable to connect to the database:', err);
