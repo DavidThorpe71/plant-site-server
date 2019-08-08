@@ -7,7 +7,6 @@ class PlantAPI extends DataSource {
   }
 
   async getPlant({ permalink } = {}) {
-    console.log({ permalink });
     const plant = await this.models.Plant.findOne({
       permalink
     }).exec();
